@@ -79,6 +79,17 @@ public class MonthViewActivity extends AppCompatActivity {
         day_of_the_week.setAdapter(adapter);
         gridView.setAdapter(adapter2);
 
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                if(position>=dayOfWeek-1) { // 1의 요일보다 앞에 있을 때에는 클릭에 반응하지 않음
+                    Toast.makeText(MonthViewActivity.this,
+                            year + "." + (month + 1) + "." + (position - dayOfWeek + 2),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         prevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
