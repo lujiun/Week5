@@ -69,11 +69,11 @@ public class MonthViewActivity extends AppCompatActivity {
         yearMonthTV.setText(year + "년 " + (month+1) + "월");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,
+                R.layout.day_of_the_week,
                 dayOfTheWeek);
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,
+                R.layout.day,
                 days);
 
         day_of_the_week.setAdapter(adapter);
