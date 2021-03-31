@@ -12,6 +12,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -77,5 +78,38 @@ public class MonthViewActivity extends AppCompatActivity {
 
         day_of_the_week.setAdapter(adapter);
         gridView.setAdapter(adapter2);
+
+        prevBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent bt_Intent = new Intent(getApplicationContext(), MonthViewActivity.class);
+                if(month<1) {
+                    bt_Intent.putExtra("year", year-1);
+                    bt_Intent.putExtra("month", 11);
+                }
+                else {
+                    bt_Intent.putExtra("year", year);
+                    bt_Intent.putExtra("month", (month-1));
+                }
+                startActivity(bt_Intent);
+                finish();
+            }
+        });
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent bt_Intent = new Intent(getApplicationContext(), MonthViewActivity.class);
+                if(month>10) {
+                    bt_Intent.putExtra("year", year+1);
+                    bt_Intent.putExtra("month", 0);
+                }
+                else {
+                    bt_Intent.putExtra("year", year);
+                    bt_Intent.putExtra("month", (month+1));
+                }
+                startActivity(bt_Intent);
+                finish();
+            }
+        });
     }
 }
