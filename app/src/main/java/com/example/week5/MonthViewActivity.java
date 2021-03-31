@@ -50,16 +50,16 @@ public class MonthViewActivity extends AppCompatActivity {
         }
 
         cal.set(year, month, 1);
-        dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); // 첫날 요일구하기
+        dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)-1; // 첫날 요일구하기, 0부터 시작하기 위해 1을 빼주었다.
 
         for(int i = 1; i <= 28; i++) day28.add("" + i);
         for(int i = 1; i <= 29; i++) day29.add("" + i);
         for(int i = 1; i <= 30; i++) day30.add("" + i);
         for(int i = 1; i <= 31; i++) day31.add("" + i); // 각각의 배열에 28~31일만큼 숫자 할당해줌
 
-        if(dayOfWeek != 1) {
-            for (int i = 1; i < dayOfWeek; i++) days.add(""); // 1일의 요일을 구해서 그 값만큼 격자 앞쪽에 빈칸 만들어줌
-        }
+
+        for (int i = 0; i < dayOfWeek; i++) days.add(""); // 1일의 요일을 구해서 그 값만큼 격자 앞쪽에 빈칸 만들어줌
+
 
         if (month == 1 && year % 4 != 0) days.addAll(day28); // 2월 - 28일
         if (month == 1 && year % 4 == 0) days.addAll(day29); // 2월/윤달 - 29일
@@ -82,9 +82,9 @@ public class MonthViewActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-                if(position>=dayOfWeek-1) { // 1의 요일보다 앞에 있을 때에는 클릭에 반응하지 않음
+                if(position>=dayOfWeek) { // 1의 요일보다 앞에 있을 때에는 클릭에 반응하지 않음
                     Toast.makeText(MonthViewActivity.this,
-                            year + "." + (month + 1) + "." + (position - dayOfWeek + 2),
+                            year + "." + (month + 1) + "." + (position - dayOfWeek + 1),
                             Toast.LENGTH_SHORT).show();
                 }
             }
