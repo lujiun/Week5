@@ -33,10 +33,6 @@ public class MonthViewActivity extends AppCompatActivity {
 
         final String[] dayOfTheWeek = new String[]{"일", "월", "화", "수", "목", "금", "토"};
         ArrayList<String> days = new ArrayList<String>();
-        ArrayList<String> day28 = new ArrayList<String>();
-        ArrayList<String> day29 = new ArrayList<String>();
-        ArrayList<String> day30 = new ArrayList<String>();
-        ArrayList<String> day31 = new ArrayList<String>();
         TextView yearMonthTV = findViewById(R.id.year_month);
         Calendar cal = Calendar.getInstance();
 
@@ -52,19 +48,13 @@ public class MonthViewActivity extends AppCompatActivity {
         cal.set(year, month, 1);
         dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)-1; // 첫날 요일구하기, 0부터 시작하기 위해 1을 빼주었다.
 
-        for(int i = 1; i <= 28; i++) day28.add("" + i);
-        for(int i = 1; i <= 29; i++) day29.add("" + i);
-        for(int i = 1; i <= 30; i++) day30.add("" + i);
-        for(int i = 1; i <= 31; i++) day31.add("" + i); // 각각의 배열에 28~31일만큼 숫자 할당해줌
-
-
         for (int i = 0; i < dayOfWeek; i++) days.add(""); // 1일의 요일을 구해서 그 값만큼 격자 앞쪽에 빈칸 만들어줌
 
 
-        if (month == 1 && year % 4 != 0) days.addAll(day28); // 2월 - 28일
-        if (month == 1 && year % 4 == 0) days.addAll(day29); // 2월/윤달 - 29일
-        if (month == 3 || month == 5 || month == 8 || month == 10) days.addAll(day30); // 4,6,9,11월 - 30일
-        if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) days.addAll(day31); // 1,3,5,7,8,10,12월 - 31일
+        if (month == 1 && year % 4 != 0) for(int i = 1; i <= 28; i++) days.add("" + i); // 2월 - 28일
+        if (month == 1 && year % 4 == 0) for(int i = 1; i <= 29; i++) days.add("" + i); // 2월/윤달 - 29일
+        if (month == 3 || month == 5 || month == 8 || month == 10) for(int i = 1; i <= 30; i++) days.add("" + i); // 4,6,9,11월 - 30일
+        if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) for(int i = 1; i <= 31; i++) days.add("" + i); // 1,3,5,7,8,10,12월 - 31일
 
         yearMonthTV.setText(year + "년 " + (month+1) + "월");
 
@@ -78,6 +68,7 @@ public class MonthViewActivity extends AppCompatActivity {
 
         day_of_the_week.setAdapter(adapter);
         gridView.setAdapter(adapter2);
+
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
